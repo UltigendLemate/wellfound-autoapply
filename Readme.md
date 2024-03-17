@@ -3,8 +3,13 @@ This is a simple script that will automate the process of you applying to jobs o
 Demo Link : 
 
 Steps to make it work : 
-1) firefox - install
-2) geckodriver - install
-3) wellfound - filter set
-4) git clone
-5) env populate
+ - [Install Firefox](#install-firefox)
+ - [Install Geckodriver](#install-geckodriver)
+ - [Set wellfound](#set-wellfound)
+ - [Clone Repo](#clone-repo)
+ - [Populate Env](#populate-env)
+
+#### Install Firefox
+Download Mozilla Firefox from [here](https://www.mozilla.org/en-US/firefox/new/). Currently the script runs only on your Firefox Browser
+
+#### Install Geckodriver
