@@ -106,7 +106,8 @@ def generate_cover_letter(job_description: str) -> str:
 
     "{job_description}"
 
-    Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects, then include their link as well from resume. Do not include any variable, or greetings or footer (signing off) in the cover letter."""
+    Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects, then include their link as well from resume.  
+    Strictly Do not include any variable, or greetings or footer (signing off) in the response."""
     response  = model.generate_content(prompt)
     print(response.text)
     return response.text
