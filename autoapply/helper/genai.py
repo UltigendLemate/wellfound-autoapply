@@ -1,0 +1,53 @@
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # Load variables from .env file
+
+API_KEY = os.getenv("API_KEY")
+RESUME_PATH = os.getenv("RESUME_PATH")
+genai.configure(api_key=API_KEY)
+
+class CoverLetterGenerator:
+    def __init__(self, model_name="gemini-1.0-pro-001"):
+        self.model_name = model_name
+        self.generation_config = {
+            "temperature": 0.9,
+            "top_p": 1,
+            "top_k": 1,
+            "max_output_tokens": 2048,
+        }
+        self.safety_settings = [
+            {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+            {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
+        ]
+        self.model = genai.GenerativeModel(
+            model_name=self.model_name,
+            generation_config=self.generation_config,
+            safety_settings=self.safety_settings
+        )
+
+    def generate_cover_letter(self, job_description: str) -> str:
+        try:
+            with open(RESUME_PATH, 'r', encoding='utf-8') as file:
+                resume_text = file.read()
+        except FileNotFoundError:
+            print(f"Error: File '{RESUME_PATH}' not found.")
+        except UnicodeDecodeError:
+            print("Error: Unable to decode the file using UTF-8 encoding.")
+
+        prompt = f"""
+        My Resume : 
+        "{resume_text}"
+
+        Create a custom brief cover letter (to enter on a job portal) for the following job description :
+
+        "{job_description}"
+
+        Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects, then include their link as well from resume.  
+        Strictly Do not include any variable, or greetings or footer (signing off) in the response."""
+        
+        response = self.model.generate_content(prompt)
+        return response.text
