@@ -45,8 +45,9 @@ class CoverLetterGenerator:
         Create a custom brief cover letter (to enter on a job portal) for the following job description :
 
         "{job_description}"
+        My best projects are Synapse (https://shortenn.me/chaitanya-synapse) and Quikplanr (https://www.shortenn.me/chaitanya-quikplanr). use these links.
 
-        Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects, then include their link as well from resume.  
+        Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects (encouraged to do), then include their link as well from resume.  
         Strictly Do not include any variable, or greetings or footer (signing off) in the response."""
         
         response = self.model.generate_content(prompt)
