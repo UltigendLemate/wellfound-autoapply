@@ -1,6 +1,7 @@
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
+from autoapply.helper.pdfhandler import PDFHandler
 
 load_dotenv()  # Load variables from .env file
 
@@ -29,10 +30,12 @@ class CoverLetterGenerator:
             safety_settings=self.safety_settings
         )
 
+        self.pdflinks = PDFHandler(RESUME_PATH)
+
     def generate_cover_letter(self, job_description: str) -> str:
         try:
-            with open(RESUME_PATH, 'r', encoding='utf-8') as file:
-                resume_text = file.read()
+            project_links = self.pdflinks.extract_links()
+            resume_text = self.pdflinks.extract_text()
         except FileNotFoundError:
             print(f"Error: File '{RESUME_PATH}' not found.")
         except UnicodeDecodeError:
@@ -45,7 +48,7 @@ class CoverLetterGenerator:
         Create a custom brief cover letter (to enter on a job portal) for the following job description :
 
         "{job_description}"
-        My best projects are Synapse (https://shortenn.me/chaitanya-synapse) and Quikplanr (https://www.shortenn.me/chaitanya-quikplanr). use these links.
+        Here is links of my all projects and userhandles for mail and various other profiles use these links where there are relevant. Here the list of all links "{project_links}"
 
         Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects (encouraged to do), then include their link as well from resume.  
         Strictly Do not include any variable, or greetings or footer (signing off) in the response."""
