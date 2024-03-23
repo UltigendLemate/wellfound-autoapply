@@ -48,7 +48,7 @@ class CoverLetterGenerator:
         Create a custom brief cover letter (to enter on a job portal) for the following job description :
 
         "{job_description}"
-        Here is links of my all projects and userhandles for mail and various other profiles use these links where there are relevant. Here the list of all links "{project_links}"
+        Here is links of my all projects and userhandles for mail and various other profiles use these links where there are relevant. Here the list of all links "{project_links} use actual links dont just use link keyword give actual projects links in cover letter"
 
         Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects (encouraged to do), then include their link as well from resume.  
         Strictly Do not include any variable, or greetings or footer (signing off) in the response."""

@@ -8,20 +8,30 @@ from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
 from autoapply.helper.gui import GUI
 from autoapply.helper.gotolink import Gotolink
-import os
-from dotenv import load_dotenv
+import configparser
 
-load_dotenv()  # Load variables from .env file
 
 class JobScraper:
-    def __init__(self):
+    def __init__(self, api_key, profile_path, resume_path):
         self.options = FirefoxOptions()
-        profile_path = os.getenv("PROFILE_PATH")
-
         self.options.profile = webdriver.FirefoxProfile(profile_path)
         self.driver = webdriver.Firefox(service=FirefoxService(executable_path=GeckoDriverManager().install()), options=self.options)
         self.driver.get('https://wellfound.com/jobs')
         self.data = []
+
+        # Write configuration to .env file
+        self.write_config(api_key, profile_path, resume_path)
+
+    def write_config(self, api_key, profile_path, resume_path):
+        config = configparser.ConfigParser()
+        config['DEFAULT'] = {
+            'API_KEY': api_key,
+            'PROFILE_PATH': profile_path,
+            'RESUME_PATH': resume_path
+        }
+
+        with open('.env', 'w') as configfile:
+            config.write(configfile)
 
     def scrape_jobs(self):
         last_height = self.driver.execute_script("return document.body.scrollHeight")
