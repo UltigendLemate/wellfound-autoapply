@@ -50,7 +50,7 @@ class Gotolink:
                 print("application status sent for", link)
                 print(cover_letter,"\n\n")
                 # comment if testing
-                # send_application_button.click()
+                send_application_button.click()
                 self.excel_handler.add_application(link, text, cover_letter)
                 self.excel_handler.save_excel()
                 time.sleep(5)
