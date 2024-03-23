@@ -11,6 +11,7 @@ from selenium.common.exceptions import InvalidSessionIdException
 from autoapply.helper.genai import CoverLetterGenerator
 import os
 from dotenv import load_dotenv
+from autoapply.helper.excel_handler import ExcelHandler
 
 load_dotenv()  # Load variables from .env file
 
@@ -21,6 +22,7 @@ class Gotolink:
         self.options.profile = webdriver.FirefoxProfile(profile_path)
         self.driver = webdriver.Firefox(service=FirefoxService(executable_path=GeckoDriverManager().install()), options=self.options)
         self.data = []
+        self.excel_handler = ExcelHandler()
 
     def process_link(self, link, d,k, lock):
         with lock:  # Ensure exclusive tab access
@@ -33,19 +35,6 @@ class Gotolink:
                 )
                 text = jobDesc.text
                 coverletter = CoverLetterGenerator()
-                # try : 
-                #     teamMembers = WebDriverWait(self.driver,5).until(
-                #         EC.presence_of_all_elements_located((By.CSS_SELECTOR,".styles_identity__CgS8E .styles_left__aDiT6 .styles_defaultLink__eZMqw"))
-                #     )
-                #     teamMemberLinks =[]
-                #     for i in teamMembers:
-                #         teamMemberLinks.append(i.get_attribute("href"))
-                #     print(teamMemberLinks)
-                #     d[k]["teamMemberLinks"] = teamMemberLinks
-                #     self.processTeamLinks(teamMemberLinks,d,k)
-                # except : 
-                #     print("team not found for ",link)
-                
                 cover_letter = coverletter.generate_cover_letter(job_description=text)
                 applyButton = WebDriverWait(self.driver, 10).until(
                     EC.element_to_be_clickable((By.CLASS_NAME, "styles_applyButton__k2sNa"))
@@ -62,6 +51,8 @@ class Gotolink:
                 print(cover_letter,"\n\n")
                 # comment if testing
                 # send_application_button.click()
+                self.excel_handler.add_application(link, text, cover_letter)
+                self.excel_handler.save_excel()
                 time.sleep(5)
             except Exception as e:
                 print("Error:", e)
