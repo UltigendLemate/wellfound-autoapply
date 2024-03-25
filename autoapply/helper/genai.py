@@ -1,7 +1,7 @@
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-from autoapply.helper.pdfhandler import PDFHandler
+from pdfhandler import PDFHandler
 
 load_dotenv()  # Load variables from .env file
 

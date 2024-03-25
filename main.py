@@ -1,8 +1,14 @@
 from autoapply.autoapply import JobScraper
+import os
+from dotenv import load_dotenv
+load_dotenv()  # Load variables from .env file
 
-job_scraper = JobScraper(api_key="AIzaSyD2R7Ao", 
-                         profile_path=r"C:\Users\raman\AppData\Roaming\Mozilla\Firefox\Profiles\r2eazyi9.default-release", 
-                         resume_path=r"C:\Users\raman\Downloads\RESUME.pdf")
+API_KEY = os.getenv("API_KEY")
+RESUME_PATH = os.getenv("RESUME_PATH")
+profile_path = os.getenv("PROFILE_PATH")
+job_scraper = JobScraper(api_key=API_KEY, 
+                         profile_path=profile_path, 
+                         resume_path=RESUME_PATH)
 job_scraper.scrape_jobs()
 job_scraper.run_gui()
 job_scraper.process_links()
