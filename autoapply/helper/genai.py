@@ -1,7 +1,7 @@
 import google.generativeai as genai
 import os
 from dotenv import load_dotenv
-from pdfhandler import PDFHandler
+from autoapply.helper.pdfhandler import PDFHandler
 
 load_dotenv()  # Load variables from .env file
 
@@ -51,7 +51,7 @@ class CoverLetterGenerator:
         Here is links of my all projects and userhandles for mail and various other profiles use these links where there are relevant. Here the list of all links "{project_links} use actual links dont just use link keyword give actual projects links in cover letter"
 
         Ensure the cover letter is brief (not more than 5-6 lines). Make the cover letter stand out. try some quirky statements. but ensure to keep it professional. Tone down the vocabulary to sound like a college student. Do not use heavy words. Do not be informal. Be polite. If you mention any projects (encouraged to do), then include their link as well from resume.  
-        Strictly Do not include any variable, or greetings or footer (signing off) in the response."""
+        Strictly Do not include any variable, or greetings or footer (signing off) in the response. dont include any variables. recheck twice. include links."""
         
         response = self.model.generate_content(prompt)
         return response.text

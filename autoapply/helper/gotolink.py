@@ -8,10 +8,10 @@ from selenium.webdriver.support import expected_conditions as EC
 import time
 import threading
 from selenium.common.exceptions import InvalidSessionIdException
-from genai import CoverLetterGenerator
+from autoapply.helper.genai import CoverLetterGenerator
 import os
 from dotenv import load_dotenv
-from excel_handler import ExcelHandler
+from autoapply.helper.excel_handler import ExcelHandler
 
 load_dotenv()  # Load variables from .env file
 
