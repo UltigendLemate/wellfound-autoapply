@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='autoply',
-    version='1.0.0',
+    version='1.0.1',
     description='Just as the name implies, auto apply on wellfound with a custom cover letter for every role. Sit back and let AI help you get the job :)',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',

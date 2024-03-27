@@ -31,5 +31,7 @@ pip install -r ./requirements.txt
 ```
 
 
-### Populate env
+#### Populate env
 check the format of env variables in env.example file.
+
+Run Main.py after doing all the above steps. Reach out to me incase of any issue.
